@@ -8,7 +8,7 @@ export const handler: Handlers<Post> = {
   async GET(_req, ctx) {
     const pool = getRandomPool();
     const selectedPost = await getRandomPostFromSubreddit(pool).catch(
-      () => undefined
+      async () => await getRandomPostFromSubreddit("memes")
     );
 
     return ctx.render(selectedPost);
@@ -22,7 +22,7 @@ export default function Home(props: PageProps<Post>) {
         <title>daily meme</title>
       </Head>
       <div class="flex flex-wrap flex-col items-center p-4 lg:p-12">
-        <h1 class="text-3xl	font-bold">Daily meme</h1>
+        <h1 class="text-4xl	font-bold">Daily meme</h1>
         <Meme {...props.data} />
       </div>
     </>

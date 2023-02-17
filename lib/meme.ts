@@ -1,13 +1,18 @@
 import { MEME_POOLS } from "./config.ts";
-import { Post, RedditPost } from "./models.ts";
-import { randomPost } from "npm:simple-reddit-api";
+import { Post, RedditPost, RedditResponse } from "./models.ts";
 
 function parseRedditPost(post: RedditPost): Post {
-  const { author, subreddit_name_prefixed, title, ups, url } = post;
-  return {
-    imageURL: url,
+  const {
     author,
+    subreddit_name_prefixed,
+    title,
+    ups,
+    url_overridden_by_dest,
+  } = post;
+  return {
+    imageURL: url_overridden_by_dest,
     subreddit: subreddit_name_prefixed,
+    author,
     title,
     ups,
   };
@@ -16,8 +21,17 @@ function parseRedditPost(post: RedditPost): Post {
 export async function getRandomPostFromSubreddit(
   subreddit: string
 ): Promise<Post> {
-  const response = await randomPost({ subreddit: subreddit });
-  const post = response.posts[0].data;
+  const response = await fetch(
+    `https://www.reddit.com/r/${subreddit}/random.json`,
+    { headers: { "User-Agent": "DailyMeme/0.1 by Paolo" } }
+  );
+
+  const rawPost: RedditResponse = await response.json();
+  const data = rawPost.at(0)?.data.children;
+  if (!data) throw new Error();
+
+  const post = data.find((el) => el.data.url_overridden_by_dest)?.data;
+  if (!post) throw new Error();
   return parseRedditPost(post);
 }
 
