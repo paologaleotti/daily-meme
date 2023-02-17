@@ -7,21 +7,9 @@ export type Post = {
 };
 
 export type RedditPost = {
-  subreddit: string;
+  subreddit_name_prefixed: string;
   title: string;
   author: string;
-  url_overridden_by_dest: string;
+  url: string;
   ups: number;
 };
-
-export type RedditPostResponseChildren = {
-  data: RedditPost;
-};
-
-export type RedditPostResponse = {
-  data: {
-    children: RedditPostResponseChildren[];
-  };
-};
-
-export type RedditResponse = RedditPostResponse[];
