@@ -1,23 +1,36 @@
 import { Head } from "$fresh/runtime.ts";
-import Counter from "../islands/Counter.tsx";
+import { Handlers, PageProps } from "$fresh/server.ts";
+import {
+  getPostsFromSubreddit,
+  getRandomPostFromPool,
+  Post,
+} from "../lib/meme.ts";
+import Meme from "../components/Meme.tsx";
 
-export default function Home() {
+export const handler: Handlers<Post> = {
+  async GET(_req, ctx) {
+    const memes = await Promise.all([
+      getPostsFromSubreddit("memes"),
+      getPostsFromSubreddit("dankmemes"),
+      getPostsFromSubreddit("nukedmemes"),
+    ]);
+
+    const pool = memes.flat();
+
+    const selectedPost = getRandomPostFromPool(pool);
+    return ctx.render(selectedPost);
+  },
+};
+
+export default function Home(props: PageProps<Post>) {
   return (
     <>
       <Head>
-        <title>Fresh App</title>
+        <title>daily meme</title>
       </Head>
-      <div class="p-4 mx-auto max-w-screen-md">
-        <img
-          src="/logo.svg"
-          class="w-32 h-32"
-          alt="the fresh logo: a sliced lemon dripping with juice"
-        />
-        <p class="my-6">
-          Welcome to `fresh`. Try updating this message in the
-          ./routes/index.tsx file, and refresh.
-        </p>
-        <Counter start={3} />
+      <div class="flex flex-col items-center p-12">
+        <h1 class="text-3xl	font-bold">Daily meme</h1>
+        <Meme {...props.data} />
       </div>
     </>
   );
