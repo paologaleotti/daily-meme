@@ -14,7 +14,7 @@ export default function Meme(props: MemeProps) {
     <div class="flex flex-col items-center m-12">
       <h2 class="text-2xl">{title}</h2>
       <img
-        class="h-auto w-full lg:w-96 my-4 border border-gray-600 "
+        class="h-auto w-full lg:w-96 md:w-96 my-4 border border-gray-600 "
         src={imageURL}
       />
       <div class="flex flex-row items-center text-gray-500">
