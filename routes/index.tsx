@@ -1,6 +1,6 @@
 import { Head } from "$fresh/runtime.ts";
 import { Handlers, PageProps } from "$fresh/server.ts";
-import Meme from "../components/Meme.tsx";
+import DailyMeme from "../islands/DailyMeme.tsx";
 import { getRandomPool, getRandomPostFromSubreddit } from "../lib/meme.ts";
 import { Post } from "../lib/models.ts";
 
@@ -21,10 +21,7 @@ export default function Home(props: PageProps<Post>) {
       <Head>
         <title>daily meme</title>
       </Head>
-      <div class="flex flex-wrap flex-col items-center p-4 lg:p-12">
-        <h1 class="text-4xl	font-bold">Daily meme</h1>
-        <Meme {...props.data} />
-      </div>
+      <DailyMeme initialPost={props.data} />
     </>
   );
 }
