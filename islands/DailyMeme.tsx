@@ -20,8 +20,8 @@ export default function DailyMeme(props: { initialPost: Post }) {
   }
 
   return (
-    <div class="flex flex-wrap flex-col items-center justify-center p-4 lg:p-12 overflow-x-hidden">
-      <h1 class="text-center text-4xl	font-bold mb-8">Daily meme</h1>
+    <div class="flex flex-col items-center justify-center p-4 lg:p-12 overflow-x-hidden">
+      <h1 class="text-center text-4xl	font-bold mb-8 mx-auto">Daily meme</h1>
       <Button onClick={fetchMeme} text="Refresh" />
 
       {loading ? <Spinner class="my-32" /> : <Meme {...post} />}
