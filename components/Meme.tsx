@@ -16,6 +16,7 @@ export default function Meme(props: MemeProps) {
       <img
         class="h-auto w-full lg:w-96 md:w-96 my-4 border border-gray-600 "
         src={imageURL}
+        alt={title}
       />
       <div class="flex flex-row items-center text-gray-500">
         <p class="mx-2">Author: {author}</p>
