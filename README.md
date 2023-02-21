@@ -13,3 +13,8 @@ Minimalistic web app that picks random memes from Reddit, made with Deno and Fre
 - Serverless deploy on Deno
 - SSR and Islands component architecture thanks to Fresh
 - Minimal styling with TailwindCSS
+- Automatic Github deploy on push
+
+## Try it
+
+- https://daily-meme.deno.dev/
