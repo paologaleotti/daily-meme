@@ -3,6 +3,8 @@
 
 # daily-meme
 
+⚠️As of now, deno deploy has an [issue](https://github.com/denoland/fresh/issues/1098) i still cannot fix, se the page is not aviable.
+
 Minimalistic web app that picks random memes from Reddit, made with Deno and Fresh.
 
 [![Made with Fresh](https://fresh.deno.dev/fresh-badge.svg)](https://fresh.deno.dev)
